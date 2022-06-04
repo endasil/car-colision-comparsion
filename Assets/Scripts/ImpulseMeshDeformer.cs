@@ -108,7 +108,6 @@ namespace Assets.Scripts
                 _meshFilters[meshNr].mesh.SetVertices(damagedMeshData[meshNr]);
                 _meshFilters[meshNr].mesh.RecalculateNormals();
             }
-
         }
     }
 }
