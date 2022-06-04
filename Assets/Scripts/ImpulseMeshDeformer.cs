@@ -72,10 +72,17 @@ namespace Assets.Scripts
                     // Change the collision point to local coordinates of the meshs object.
                     Vector3 localContactPoint = meshFilter.transform.InverseTransformPoint(collisionContact.point);
 
+
+                    
+                    
                     // Calculate the amount meshes should be deformed by taking the local collision direction and scaling
                     // it with the impulse and then multiplying it with scaling modifier.
                     var deformVector = localDirection * _deformScalar * collision.impulse.magnitude;
-                    
+
+                    deformVector.x /= meshFilter.transform.localScale.x;
+                    deformVector.y /= meshFilter.transform.localScale.y;
+                    deformVector.z /= meshFilter.transform.localScale.z;
+                    //Debug.Log("Divided with scale " + meshFilter.transform.localScale);
                     // Go trough each vertices in the meshFilters mesh.
                     for (int vertexNr = 0; vertexNr < damagedMeshData[meshNr].Length; vertexNr++)
                     {
