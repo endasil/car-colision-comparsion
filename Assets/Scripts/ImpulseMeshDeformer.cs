@@ -79,6 +79,7 @@ namespace Assets.Scripts
                     // it with the impulse and then multiplying it with scaling modifier.
                     var deformVector = localDirection * _deformScalar * collision.impulse.magnitude;
 
+                    // Attempt to scale transform vector with local scale of mesh but does not seem to be the correct way of doing this...
                     deformVector.x /= meshFilter.transform.localScale.x;
                     deformVector.y /= meshFilter.transform.localScale.y;
                     deformVector.z /= meshFilter.transform.localScale.z;
