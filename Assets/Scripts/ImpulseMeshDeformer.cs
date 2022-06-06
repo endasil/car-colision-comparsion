@@ -1,15 +1,20 @@
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
+using Unity.Burst.Intrinsics;
+using Unity.VisualScripting;
 using UnityEngine;
+using static UnityEditor.PlayerSettings;
+using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 namespace Assets.Scripts
 {
-    public class ImpulseMeshDeformer : MonoBehaviour
-    {
-        private float _deformScalar = 0.1f;
+public class ImpulseMeshDeformer : MonoBehaviour
+{
+private float _deformScalar = 0.1f;
 
-        // Only deform vertices that are within this distance from the collision
-        private float maxVertexCollisionPointDistance = 0.5f;
+        [Header("Only deform vertices that are within this distance from the collision")]
+        [SerializeField]private float maxVertexCollisionPointDistance = 0.5f;
         // List of all mesh filters who's mesh we want to deform
         [SerializeField] private List<MeshFilter> _meshFilters;
 
@@ -23,8 +28,8 @@ namespace Assets.Scripts
         // Preallocate memory to hold contact points to reduce the need for memory allocation and garbage at runtime
         private readonly List<ContactPoint> _collisionContacts = new List<ContactPoint>(50);
 
-        // Only allow a vertice to be moved this far from its original point
-        private float _maxDeformOffset = 0.5f;
+        [Header("Only allow a vertice to be moved this far from its original point")]
+        [SerializeField] private float _maxDeformOffset = 0.5f;
         
         void Start()
         {
