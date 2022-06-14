@@ -1,11 +1,6 @@
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
-using Unity.Burst.Intrinsics;
-using Unity.VisualScripting;
 using UnityEngine;
-using static UnityEditor.PlayerSettings;
-using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
 namespace Assets.Scripts
 {
