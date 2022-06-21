@@ -9,9 +9,10 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container: ubuntu:18.04
+container: $CONTAINER_NAME
 
 variables:
+  CONTAINER_NAME: ubuntu:18.04
   BUILD_NAME: car-collision-comparsion
   UNITY_ACTIVATION_FILE: ./unity3d.alf
   IMAGE: unityci/editor # https://hub.docker.com/r/unityci/editor
