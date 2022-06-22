@@ -9,8 +9,6 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-container: $CONTAINER_NAME
-
 variables:
   CONTAINER_NAME: ubuntu:18.04
   BUILD_NAME: car-collision-comparsion
@@ -22,6 +20,7 @@ variables:
   VERSION_NUMBER_VAR: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_JOB_ID
   VERSION_BUILD_VAR: $CI_PIPELINE_IID
 
+container: $(CONTAINER_NAME)
 
 
 steps:
