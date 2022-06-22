@@ -26,6 +26,9 @@ container:  $[variables['CONTAINER_NAME']]
 
 steps:
 - script: echo UNITY_VERSION=$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}') | tee prepare.env
+- bash: |
+    echo "##vso[task.setvariable variable=UNITY_VERSION;]$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}') | tee prepare.env"
+
 - script: echo Unity Variable name is set to $(UNITY_VERSION)
   displayName: 'Run a one-line script'
 
