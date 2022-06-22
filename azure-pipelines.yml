@@ -20,7 +20,7 @@ variables:
   VERSION_NUMBER_VAR: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_JOB_ID
   VERSION_BUILD_VAR: $CI_PIPELINE_IID
 
-container:  $[ variables['CONTAINER_NAME'] 
+container:  $[variables['CONTAINER_NAME']]
 
 
 
