@@ -5,6 +5,8 @@ set -e
 # every executed statement is printed to the shell for debugging or troubleshooting purposes.
 set -x
 
+echo 
+
 # WHY do we create a .cache and .local directory here?
 mkdir -p /root/.cache/unity3d
 
