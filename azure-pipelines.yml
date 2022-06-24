@@ -10,7 +10,7 @@ pool:
   vmImage: ubuntu-latest
 
 variables:
-  CONTAINER_NAME: ubuntu:18.04
+  CONTAINER_NAME:  unityci/editor:2021.3.0f1-android-1 
   BUILD_NAME: car-collision-comparsion
   UNITY_ACTIVATION_FILE: ./unity3d.alf
   IMAGE: unityci/editor # https://hub.docker.com/r/unityci/editor
@@ -21,7 +21,7 @@ variables:
   VERSION_BUILD_VAR: $CI_PIPELINE_IID
 
 container:  $[variables['CONTAINER_NAME']]
-
+ 
 
 
 steps:
