@@ -29,7 +29,8 @@ stages:
     steps:                
     - bash: echo "##vso[task.setvariable variable=UNITY_VERSION;isOutput=true]$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}')"
       name: get_unity_version_step    
-    - script: echo get_unity_version_step $(get_unity_version_step.UNITY_VERSION)
+    - script: echo Unity version found $(get_unity_version_step.UNITY_VERSION)
+      displayName: Printing unity version
 - stage: 'BuildAndroid'
   displayName: 'Build an android apk'
   dependsOn: 'Prepare'
@@ -39,8 +40,17 @@ stages:
     variables:
       UNITY_VERSION: $[ stageDependencies.Prepare.get_unity_version_job.outputs['get_unity_version_step.UNITY_VERSION'] ]  
     container: $(IMAGE):$(UNITY_VERSION)-base-$(IMAGE_VERSION)
-    steps:    
-    - script: echo VERSION from Android stage $(UNITY_VERSION)
-    - script: chmod +x ./ci/before_script.sh && ./ci/before_script.sh
-    
+    steps:        
+    - script: 
+    - script: |
+        set -x
+        ls -la
+        chmod +x ./.ci/create_unity_license_file.sh 
+        ./.ci/create_unity_license_file.sh
+      displayName:  Create unity license file from license stored in UNITY_LICENSE secret
+    - script: |
+        set -x
+        chmod +x ./.ci/create_android_keystore_file.sh 
+        ./.ci/create_android_keystore_file.sh
+      displayName: Create a keystore file from the ANDROID_KEYSTORE_BASE64 secret
     
