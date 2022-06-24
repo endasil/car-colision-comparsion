@@ -24,19 +24,23 @@ stages:
 - stage: 'Prepare'
   displayName: 'Prepare'
   jobs:
-  - job: 'get_unity_version'
+  - job: 'get_unity_version_job'
     container:  ubuntu:latest
     steps:                
     - bash: echo "##vso[task.setvariable variable=UNITY_VERSION;isOutput=true]$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}')"
-      name: unitystuff    
-    - script: echo unityver $(UNITY_VERSION)
-    - script: echo unitystuff $(unitystuff.UNITY_VERSION)
+      name: get_unity_version_step    
+    - script: echo get_unity_version_step $(get_unity_version_step.UNITY_VERSION)
 - stage: 'BuildAndroid'
   displayName: 'Build an android apk'
   dependsOn: 'Prepare'
+  #condition: ne(stageDependencies.Prepare.get_unity_version_job.outputs['get_unity_version_step.UNITY_VERSION'], '') 
   jobs:
   - job: 'Android'
+    variables:
+      UNITY_VERSION: $[ stageDependencies.Prepare.get_unity_version_job.outputs['get_unity_version_step.UNITY_VERSION'] ]  
     container: ubuntu:latest
     steps:
     - script: echo unitystuff from Android stage $(unitystuff.UNITY_VERSION)
+    - script: echo VERSION from Android stage $(UNITY_VERSION)
+    
     
