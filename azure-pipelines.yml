@@ -41,8 +41,8 @@ stages:
     container: $(IMAGE):$(UNITY_VERSION)-base-$(IMAGE_VERSION)
     steps:        
     - script: ls -la
-    - script: chmod +x ./ci/create_unity_license_file.sh && ./ci/create_unity_license_file.sh
+    - script: chmod +x ./.ci/create_unity_license_file.sh && ./ci/create_unity_license_file.sh
       displayName:  Create unity license file from license stored in UNITY_LICENSE secret
-    - script: chmod +x ./ci/create_android_keystore_file.sh && ./ci/create_android_keystore_file.sh
+    - script: chmod +x ./.ci/create_android_keystore_file.sh && ./ci/create_android_keystore_file.sh
       displayName: Create a keystore file from the ANDROID_KEYSTORE_BASE64 secret
     
