@@ -41,5 +41,6 @@ stages:
     container: $(IMAGE):$(UNITY_VERSION)-base-$(IMAGE_VERSION)
     steps:    
     - script: echo VERSION from Android stage $(UNITY_VERSION)
+    - script: chmod +x ./ci/before_script.sh && ./ci/before_script.sh
     
     
