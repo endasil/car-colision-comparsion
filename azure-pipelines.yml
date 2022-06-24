@@ -26,6 +26,8 @@ stages:
   jobs:
   - job: 'get_unity_version'
     container:  ubuntu:latest
-    steps:            
+    steps:                
     - bash: echo "##vso[task.setvariable variable=UNITY_VERSION;isOutput=true]$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}')"
+      name: unitystuff    
     - script: echo unityver $(UNITY_VERSION)
+    - script: echo unitystuff $(unitystuff.UNITY_VERSION)
