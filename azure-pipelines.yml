@@ -24,7 +24,7 @@ stages:
 - stage: 'Prepare'
   displayName: 'Prepare'
   jobs:
-  - job: 'get-unity-version'
+  - job: 'get_unity_version'
     pool:
       vmImage: 'Ubuntu-16.04'
     container:  alpine
