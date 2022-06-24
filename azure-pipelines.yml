@@ -31,3 +31,12 @@ stages:
       name: unitystuff    
     - script: echo unityver $(UNITY_VERSION)
     - script: echo unitystuff $(unitystuff.UNITY_VERSION)
+- stage: 'BuildAndroid'
+  displayName: 'Build an android apk'
+  dependsOn: 'Prepare'
+  jobs:
+  - job: 'Android'
+    container: ubuntu:latest
+    steps:
+    - script: echo unitystuff from Android stage $(unitystuff.UNITY_VERSION)
+    
