@@ -29,4 +29,5 @@ stages:
       vmImage: 'Ubuntu-16.04'
     container:  alpine
     steps:        
-    - script: echo "hello"
+    - script: echo "##vso[task.setvariable variable=UNITY_VERSION;isOutput=true]$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}')"
+    - script: echo unityver $UNITY_VERSION    
