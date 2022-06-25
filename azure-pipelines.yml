@@ -40,6 +40,7 @@ stages:
   - job: 'Android'
     variables:
       UNITY_VERSION: $[ stageDependencies.Prepare.get_unity_version_job.outputs['get_unity_version_step.UNITY_VERSION'] ]  
+      BUILD_TARGET: Android
     container: $(IMAGE):$(UNITY_VERSION)-base-$(IMAGE_VERSION)
     steps:        
     - script: |
