@@ -17,4 +17,5 @@ then
     echo "${UNITY_LICENSE}" | tr -d '\r' > ${unity_license_destination}
 else
     echo "'\$UNITY_LICENSE' env var not found"
+	exit 8
 fi
