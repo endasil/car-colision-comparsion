@@ -43,9 +43,9 @@ stages:
     steps:        
     - script: 
     - script: |
-        set -x
-        ls -la
+        set -x                 
         chmod +x ./.ci/create_unity_license_file.sh 
+        ls -la
         ./.ci/create_unity_license_file.sh
       displayName:  Create unity license file from license stored in UNITY_LICENSE secret
     - script: |
