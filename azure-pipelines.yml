@@ -43,9 +43,7 @@ stages:
     steps:        
     - script: 
     - script: |
-        set -x
-        ls -la        
-         mkdir -p $(UNITY_DIR)/.cache/unity3d
+        set -x                 
         chmod +x ./.ci/create_unity_license_file.sh 
         ls -la
         ./.ci/create_unity_license_file.sh
