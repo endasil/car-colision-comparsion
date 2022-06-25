@@ -10,7 +10,7 @@ store_unity_license_path="$UNITY_DIR/.local/share/unity3d/Unity"
 mkdir -p "${store_unity_license_path}"
 
 # Set the directory where we want to store the unity licensing file
-unity_license_destination="${store_unity_license_path}/Unity_lic.ulf
+unity_license_destination="${store_unity_license_path}/Unity_lic.ulf"
 
 # Check if UNITY_LICENSE exist, -n means not null
 if [ -n "$UNITY_LICENSE" ]
