@@ -18,10 +18,11 @@ ${UNITY_EXECUTABLE:-xvfb-run --auto-servernum --server-args='-screen 0 640x480x2
   -customBuildName $BUILD_NAME \
   -customBuildPath $BUILD_PATH \
   -executeMethod BuildCommand.PerformBuild \
-  -logFile log.txt
+  -logFile log.txt  >/dev/null 2>&1
 
 UNITY_EXIT_CODE=$?
 
+cat log.txt
 if [ $UNITY_EXIT_CODE -eq 0 ]; then
   echo "Run succeeded, no failures occurred";
 elif [ $UNITY_EXIT_CODE -eq 2 ]; then
