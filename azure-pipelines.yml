@@ -21,26 +21,27 @@ variables:
   VERSION_BUILD_VAR: $CI_PIPELINE_IID
 
 stages:
-- stage: 'Prepare'
-  displayName: 'Read unity version'
-  jobs:
-  - job: 'get_unity_version_job'
-    container:  ubuntu:latest
-    steps:                    
-    - bash: echo "##vso[task.setvariable variable=UNITY_VERSION;isOutput=true]$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}')"
-      displayName: Read unity version from ProjectVersion.txt file and store in UNITY_VERSION
-      name: get_unity_version_step    
-    - script: echo Unity version found $(get_unity_version_step.UNITY_VERSION)
-      displayName: Printing unity version
+# - stage: 'Prepare'
+#   displayName: 'Read unity version'
+#   jobs:
+#   - job: 'get_unity_version_job'
+#     container:  ubuntu:latest
+#     steps:                    
+#     - bash: echo "##vso[task.setvariable variable=UNITY_VERSION;isOutput=true]$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}')"
+#       displayName: Read unity version from ProjectVersion.txt file and store in UNITY_VERSION
+#       name: get_unity_version_step    
+#     - script: echo Unity version found $(get_unity_version_step.UNITY_VERSION)
+#       displayName: Printing unity version
 - stage: 'BuildAndroid'
   displayName: 'Build an android apk'
-  dependsOn: 'Prepare'
+#  dependsOn: 'Prepare'
   #condition: ne(stageDependencies.Prepare.get_unity_version_job.outputs['get_unity_version_step.UNITY_VERSION'], '') 
   jobs:
   - job: 'Android'
     variables:
-      UNITY_VERSION: $[ stageDependencies.Prepare.get_unity_version_job.outputs['get_unity_version_step.UNITY_VERSION'] ]  
-      BUILD_TARGET: Android
+     UNITY_VERSION: 2021.3.0f1
+#      UNITY_VERSION: $[ stageDependencies.Prepare.get_unity_version_job.outputs['get_unity_version_step.UNITY_VERSION'] ]        
+      
     container: $(IMAGE):$(UNITY_VERSION)-base-$(IMAGE_VERSION)
     steps:        
     - script: |
