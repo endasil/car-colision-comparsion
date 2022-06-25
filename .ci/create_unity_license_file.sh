@@ -4,12 +4,15 @@
 set -e
 # every executed statement is printed to the shell for debugging or troubleshooting purposes.
 set -x
+
+store_unity_license_path="$UNITY_DIR/.local/share/unity3d/Unity"
 #create a directory where we will store a file with unity license information
-mkdir -p "$UNITY_DIR/root/.local/share/unity3d/Unity/"
+mkdir -p "${store_unity_license_path}"
 
 # Set the directory where we want to store the unity licensing file
-unity_license_destination=/root/.local/share/unity3d/Unity/Unity_lic.ulf
+unity_license_destination="${store_unity_license_path}/Unity_lic.ulf
 
+# Check if UNITY_LICENSE exist, -n means not null
 if [ -n "$UNITY_LICENSE" ]
 then
     echo "Writing '\$UNITY_LICENSE' to license file ${unity_license_destination}"
