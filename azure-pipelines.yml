@@ -22,7 +22,7 @@ variables:
 
 stages:
 - stage: 'Prepare'
-  displayName: 'Prepare'
+  displayName: 'Read unity version'
   jobs:
   - job: 'get_unity_version_job'
     container:  ubuntu:latest
@@ -42,16 +42,18 @@ stages:
       UNITY_VERSION: $[ stageDependencies.Prepare.get_unity_version_job.outputs['get_unity_version_step.UNITY_VERSION'] ]  
     container: $(IMAGE):$(UNITY_VERSION)-base-$(IMAGE_VERSION)
     steps:        
-    - script: 
     - script: |
-        set -x                 
-        chmod +x ./.ci/create_unity_license_file.sh 
-        ls -la
+        set -ex                 
+        chmod +x ./.ci/create_unity_license_file.sh         
         ./.ci/create_unity_license_file.sh
       displayName:  Create unity license file from license stored in UNITY_LICENSE secret
     - script: |
-        set -x
+        set -ex
         chmod +x ./.ci/create_android_keystore_file.sh 
         ./.ci/create_android_keystore_file.sh
       displayName: Create a keystore file from the ANDROID_KEYSTORE_BASE64 secret
-    
+    - script: |
+        set -ex
+        chmod +x ./.ci/build.sh
+        ./.ci/build.sh
+      displayName: Build
