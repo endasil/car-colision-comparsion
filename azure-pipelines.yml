@@ -27,6 +27,7 @@ stages:
   - job: 'get_unity_version_job'
     container:  ubuntu:latest
     steps:                
+    - script: echo $(UNITY_LISENCE)
     - bash: echo "##vso[task.setvariable variable=UNITY_VERSION;isOutput=true]$(cat $UNITY_DIR/ProjectSettings/ProjectVersion.txt | grep "m_EditorVersion:.*" | awk '{ print $2}')"
       name: get_unity_version_step    
     - script: echo Unity version found $(get_unity_version_step.UNITY_VERSION)
