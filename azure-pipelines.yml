@@ -45,6 +45,7 @@ stages:
     - script: |
         set -x
         ls -la
+        docker exec -u 0
         sudo mkdir -p /root/.cache/unity3d
         chmod +x ./.ci/create_unity_license_file.sh 
         ls -la
