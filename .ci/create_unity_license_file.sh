@@ -5,7 +5,7 @@ set -e
 # every executed statement is printed to the shell for debugging or troubleshooting purposes.
 set -x
 
-store_unity_license_path="$UNITY_DIR/.local/share/unity3d/Unity"
+store_unity_license_path="/home/username/.local/share/unity3d/Unity"
 #create a directory where we will store a file with unity license information
 mkdir -p "${store_unity_license_path}"
 
