@@ -1,0 +1,38 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- none
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:  
+  UNITY_VERSION: 2021.3.0f1
+  BUILD_NAME: car-collision-comparsion
+  UNITY_ACTIVATION_FILE: ./unity3d.alf
+  IMAGE: unityci/editor # https://hub.docker.com/r/unityci/editor
+  IMAGE_VERSION: 1 # This will automatically use latest v1.x.x, see https://github.com/game-ci/docker/releases
+  UNITY_DIR: $(Build.Repository.LocalPath) # this needs to be an absolute path. Defaults to the root of your tree.
+  # You can expose this in Unity via Application.version
+  VERSION_NUMBER_VAR: $CI_COMMIT_REF_SLUG-$CI_PIPELINE_ID-$CI_JOB_ID
+  VERSION_BUILD_VAR: $CI_PIPELINE_IID
+  
+steps:
+- script: echo Hello, world!
+  displayName: 'Run a one-line script'
+
+- script: |
+      set -ex                 
+      chmod +x ./.ci/create_unity_license_file.sh         
+      ./.ci/create_unity_license_file.sh
+  displayName:  Create unity license file from license stored in UNITY_LICENSE secret
+- script: |
+        set -ex
+        chmod +x ./.ci/create_android_keystore_file.sh 
+        ./.ci/create_android_keystore_file.sh
+  displayName: Create a keystore file from the ANDROID_KEYSTORE_BASE64 secret
+- script: chmod +x ./ci/get_activation_file.sh && ./ci/get_activation_file.sh
+  displayName: get activation file
