@@ -46,14 +46,14 @@ stages:
     steps:        
     - script: |
         set -ex
+        echo $HOME
         w
         echo $USER
         whoami
         who
       displayName: Show info about user 
     - script: |
-        set -ex
-        echo $HOME
+        set -ex        
         chmod +x ./.ci/create_unity_license_file.sh         
         ./.ci/create_unity_license_file.sh
       displayName:  Create unity license file from license stored in UNITY_LICENSE secret
