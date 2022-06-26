@@ -45,6 +45,13 @@ stages:
     container: $(IMAGE):$(UNITY_VERSION)-base-$(IMAGE_VERSION)
     steps:        
     - script: |
+        set -ex
+        w
+        echo $USER
+        whoami
+        who
+      displayName: Show info about user 
+    - script: |
         set -ex                 
         chmod +x ./.ci/create_unity_license_file.sh         
         ./.ci/create_unity_license_file.sh
