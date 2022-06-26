@@ -9,7 +9,7 @@ export BUILD_PATH=$UNITY_DIR/Builds/$BUILD_TARGET/
 mkdir -p $BUILD_PATH
 
 
-store_unity_license_path="$UNITY_DIR/.local/share/unity3d/Unity"
+store_unity_license_path="$HOME/.local/share/unity3d/Unity"
 unity_license_destination="${store_unity_license_path}/Unity_lic.ulf"
 
 
@@ -17,8 +17,7 @@ ${UNITY_EXECUTABLE:-xvfb-run --auto-servernum --server-args='-screen 0 640x480x2
   -projectPath $UNITY_DIR \
   -quit \
   -batchmode \
-  -nographics \
-  -manualLicenseFile  "${unity_license_destination}" \
+  -nographics \  
   -buildTarget $BUILD_TARGET \
   -customBuildTarget $BUILD_TARGET \
   -customBuildName $BUILD_NAME \
