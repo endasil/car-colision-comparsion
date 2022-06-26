@@ -45,6 +45,7 @@ stages:
     container: $(IMAGE):$(UNITY_VERSION)-base-$(IMAGE_VERSION)
     steps:        
     - script: |
+        cat /etc/machine-id
         set -ex
         echo $HOME
         w
