@@ -9,7 +9,6 @@ export BUILD_PATH=$UNITY_DIR/Builds/$BUILD_TARGET/
 mkdir -p $BUILD_PATH
 
 cat "$HOME/.local/share/unity3d/Unity/${store_unity_license_path}/Unity_lic.ulf"
-
 ${UNITY_EXECUTABLE:-xvfb-run --auto-servernum --server-args='-screen 0 640x480x24' unity-editor} \
   -projectPath $UNITY_DIR \
   -quit \
@@ -20,7 +19,7 @@ ${UNITY_EXECUTABLE:-xvfb-run --auto-servernum --server-args='-screen 0 640x480x2
   -customBuildName $BUILD_NAME \
   -customBuildPath $BUILD_PATH \
   -executeMethod BuildCommand.PerformBuild \
-  -logFile log.txt  >/dev/null 2>&1
+  -logFile -  >/dev/null 2>&1
 
 UNITY_EXIT_CODE=$?
 
